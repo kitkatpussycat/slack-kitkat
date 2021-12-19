@@ -1,53 +1,55 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { login } from "./slack-api";
+import { login } from "../api/slack-api";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContextProvider";
 
 function Login() {
-  const [accountLogin, setAccountLogin] = useState({
+  const [loginAccount, setLoginAccount] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState([]);
-  const [flash, setFlash] = useState("");
+  const { dispatch } = useAuth();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const [response, errors] = await login(
-      accountLogin.email,
-      accountLogin.password
+  const handleLogin = async () => {
+    const { data, errors, headers } = await login(
+      loginAccount.email,
+      loginAccount.password
     );
     if (errors.length > 0) {
+      console.log(errors);
       setError(errors);
     } else {
-      console.log("login response", response);
-      setFlash("Successful login");
+      console.log("login response", data);
+      dispatch({
+        type: "LOGIN",
+        payload: { headers: headers, user: data },
+      });
     }
   };
-
   return (
     <div>
       <h1>Log-in</h1>
       <input
         type="email"
         placeholder="email"
+        value={loginAccount.email}
         onChange={(e) =>
-          setAccountLogin({ ...accountLogin, email: e.target.value })
+          setLoginAccount({ ...loginAccount, email: e.target.value })
         }
       />
-      <p>{accountLogin.email}</p>
+      <p>{loginAccount.email}</p>
       <input
         type="password"
         placeholder="password"
+        value={loginAccount.password}
         onChange={(e) =>
-          setAccountLogin({ ...accountLogin, password: e.target.value })
+          setLoginAccount({ ...loginAccount, password: e.target.value })
         }
       />
-      <nav>
-        don't have an account yet? <Link to="/register">create account</Link>
-      </nav>
-      {error.lg}
-      <button onClick={handleLogin}>LogIn</button>
+      <p>{loginAccount.password}</p>
+      <button onClick={handleLogin}>Log-in</button>
+      <Link to="/register">Create Account</Link>
     </div>
   );
 }
