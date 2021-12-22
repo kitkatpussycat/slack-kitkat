@@ -40,3 +40,64 @@ export const login = async (email, password) => {
 
   return { data, errors, headers };
 };
+//////////////////////////////////////////////////////////////////////////////////////////////Mga kinopya ko
+export const createChannel = async (users, channelName, headers) => {
+  let status;
+  let data = [];
+  try {
+    const res = await axios.post(
+      `${API_URL}/channels`,
+      {
+        name: channelName,
+        user_ids: users.map((user) => user.id),
+      },
+      {
+        headers: {
+          ...headers,
+        },
+      }
+    );
+
+    data = res.data;
+    status = res.status;
+  } catch (error) {
+    console.error(error.response);
+  }
+
+  return [data, status];
+};
+
+export const getChannels = async (headers) => {
+  let data = [];
+  try {
+    const res = await axios.get(`${API_URL}/channels`, {
+      headers: {
+        ...headers,
+      },
+    });
+
+    data = res.data.data;
+    console.log(data);
+  } catch (error) {
+    console.error(error.response);
+  }
+
+  return data;
+};
+
+export const getUsers = async (headers) => {
+  let users = [];
+  try {
+    const res = await axios.get(`${API_URL}/users`, {
+      headers: {
+        ...headers,
+      },
+    });
+    users = res.data.data;
+    console.log(users);
+  } catch (e) {
+    console.log(e.response);
+  }
+
+  return users;
+};
