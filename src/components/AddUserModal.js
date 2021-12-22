@@ -8,6 +8,7 @@ const AddUserModal = ({ closeAddUserModal }) => {
   const [listOfUsers, setListOfUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredUser, setFilteredUser] = useState(listOfUsers);
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -30,6 +31,18 @@ const AddUserModal = ({ closeAddUserModal }) => {
     }
   }, [search, listOfUsers]);
 
+  const handleAddUsers = (e, selectedUser) => {
+    e.preventDefault();
+    setSelectedUsers([...selectedUsers, selectedUser]);
+    console.log(selectedUsers);
+    console.log("nagana ba ito?");
+  };
+
+  const handleDeleteAddUser = (e, s) => {
+    e.preventDefault();
+    setSelectedUsers(selectedUsers.filter((t) => t.id !== s));
+  };
+
   return ReactDOM.createPortal(
     <div className="modalBackGround">
       <div className="card bg-yellow-500 px-20 py-5 w-1/4 h-3/4">
@@ -43,28 +56,48 @@ const AddUserModal = ({ closeAddUserModal }) => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          {/* <p>{search}</p> */}
         </div>
 
-        <div className="mt-5 mb-5 bg-red-500 w-full h-3/4 overflow-y-auto overflow-x-hidden">
+        <div className="mt-5 mb-5 bg-red-500 w-full h-1/2 overflow-y-auto overflow-x-hidden">
           <div>
             {filteredUser.map((listOfUser) => (
-              <div className="hover:text-yellow-500" key={listOfUser.id}>
+              <div
+                className="hover:text-yellow-500"
+                key={listOfUser.id}
+                onClick={(e) => handleAddUsers(e, listOfUser)}
+              >
                 {listOfUser.uid}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="footer">
+        <div className="mt-5 mb-5 bg-slate-500 w-full h-1/4 overflow-y-auto overflow-x-hidden">
+          <div>
+            {selectedUsers &&
+              selectedUsers.map((selectedUser) => (
+                <li key={selectedUser.id}>
+                  {selectedUser.uid}
+                  <button
+                    className="btn-red py-0"
+                    onClick={(e) => handleDeleteAddUser(e, selectedUser.id)}
+                  >
+                    delete
+                  </button>
+                </li>
+              ))}
+          </div>
+        </div>
+
+        <div className="flex justify-around items-center bg-blue-400 w-full h-auto">
           <button
-            className="btn-red dark:bg-gradient-pink"
+            className="btn-red mx-0 w-auto"
             onClick={() => closeAddUserModal(false)}
           >
             Close
           </button>
           <button
-            className="btn-red dark:bg-gradient-pink"
+            className="btn-red mx-0 w-auto"
             // onClick={handleCreateChannel}
           >
             Add
