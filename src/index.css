@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-image: url("https://image.freepik.com/free-vector/dynamic-gradient-grainy-background_23-2148964100.jpg");
+  background-size: cover;
+}
+
+.box-shadow {
+  box-shadow: -4px 4px 24px -5px rgba(0, 0, 0, 0.84);
+}
+
 .card {
   /* backdrop-filter: blur(5px); */
   /* background: rgba(255, 255, 255, 0.15); */
@@ -35,5 +44,9 @@
   .btn-red {
     /* @apply bg-gradient-to-r from-blue-400 to-purple-600  hover:bg-purple-500 text-white font-bold py-2 px-4 rounded mx-5; */
     @apply bg-red-500 font-bold py-2 px-4 rounded mx-5;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-blue-400 to-purple-600  hover:bg-purple-500 text-white font-bold py-2 px-4 rounded mx-5;
   }
 }

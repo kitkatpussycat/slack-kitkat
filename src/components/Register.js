@@ -31,57 +31,78 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="flex justify-center items-center h-screen w-screen">
+      {/* <div> */}
       {loading ? (
         <p>Loading ....</p>
       ) : (
-        <div>
-          <h1>Register</h1>
-          <div>
-            <input
-              type="email"
-              placeholder="email"
-              value={registerAccount.email}
-              onChange={(e) =>
-                setRegisterAccount({
-                  ...registerAccount,
-                  email: e.target.value,
-                })
-              }
-            />
+        <div className="w-1/5 h-1/2 box-shadow">
+          <div className="bg-slate-100 h-full">
+            <div className="mb-5 py-10">
+              <h1 className="text-5xl font-semibold">Sign up</h1>
+            </div>
+            <div>
+              <input
+                className="mb-5 w-4/5 h-10 bg-slate-200 px-1"
+                type="email"
+                placeholder="email"
+                value={registerAccount.email}
+                onChange={(e) =>
+                  setRegisterAccount({
+                    ...registerAccount,
+                    email: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div>
+              <input
+                className="mb-5 w-4/5 h-10 bg-slate-200 px-1"
+                type="password"
+                value={registerAccount.password}
+                placeholder="password"
+                onChange={(e) =>
+                  setRegisterAccount({
+                    ...registerAccount,
+                    password: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div>
+              <input
+                className="mb-5 w-4/5 h-10 bg-slate-200 px-1"
+                type="password"
+                placeholder="confirm password"
+                value={registerAccount.confirmPassword}
+                onChange={(e) =>
+                  setRegisterAccount({
+                    ...registerAccount,
+                    confirmPassword: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className="mb-10">
+              <button className="btn-gradient w-4/5" onClick={handleRegister}>
+                Sign up
+              </button>
+            </div>
+            <div>
+              {error.length ? error.map((err) => <p>{err}</p>) : null}
+              {flash && <p>{flash}</p>}
+              <span>Back to </span>
+              <Link className="text-blue-500" to="/">
+                Login
+              </Link>
+            </div>
           </div>
-          <div>
-            <input
-              type="password"
-              value={registerAccount.password}
-              placeholder="password"
-              onChange={(e) =>
-                setRegisterAccount({
-                  ...registerAccount,
-                  password: e.target.value,
-                })
-              }
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="confirm password"
-              value={registerAccount.confirmPassword}
-              onChange={(e) =>
-                setRegisterAccount({
-                  ...registerAccount,
-                  confirmPassword: e.target.value,
-                })
-              }
-            />
-          </div>
-          <button onClick={handleRegister}>register</button>
         </div>
       )}
-      {error.length ? error.map((err) => <p>{err}</p>) : null}
+      {/* {error.length ? error.map((err) => <p>{err}</p>) : null}
       {flash && <p>{flash}</p>}
-      <Link to="/">Login</Link>
+      <Link to="/">Login</Link> */}
+      {/* </div> */}
     </div>
   );
 }
