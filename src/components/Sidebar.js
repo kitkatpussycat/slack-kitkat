@@ -3,6 +3,7 @@ import AddChannelModal from "./AddChannelModal";
 import { getChannels } from "../api/slack-api";
 import { useAuth } from "../context/AuthContextProvider";
 import AddUserModal from "./AddUserModal";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [openAddChannelModal, setOpenAddChannelModal] = useState(false);
@@ -56,17 +57,11 @@ const Sidebar = () => {
                 <div
                   className="hover:underline"
                   key={channel.id}
-                  onClick={(e) => channelNameHandler(e, channel.name)}
+                  // onClick={(e) => channelNameHandler(e, channel.name)}
                 >
-                  {channel.name}
-                  {/* <span
-                  className="cursor-pointer font-bold"
-                  onClick={() => {
-                    setOpenAddUserModal(true);
-                  }}
-                >
-                  +
-                </span> */}
+                  <Link to={`/dashboard/body/${channel.id}`}>
+                    {channel.name}
+                  </Link>
                 </div>
                 <span
                   className="cursor-pointer font-bold"

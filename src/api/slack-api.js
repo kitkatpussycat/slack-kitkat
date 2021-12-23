@@ -101,3 +101,45 @@ export const getUsers = async (headers) => {
 
   return users;
 };
+
+export const getChannelDetail = async (headers, id) => {
+  let data = {};
+  try {
+    const res = await axios.get(`${API_URL}/channels/${id}`, {
+      headers: {
+        ...headers,
+      },
+    });
+
+    data = res.data.data;
+    console.log(res);
+  } catch (error) {
+    console.error(error.response);
+  }
+
+  return data;
+};
+
+export const addMemberChannel = async (headers, channelId, memberId) => {
+  let status;
+  try {
+    const res = await axios.post(
+      `${API_URL}/channel/add_member`,
+      {
+        id: channelId,
+        member_id: memberId,
+      },
+      {
+        headers: {
+          ...headers,
+        },
+      }
+    );
+
+    status = res.status;
+  } catch (error) {
+    console.error(error.response);
+  }
+
+  return status;
+};

@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import { useAuth } from "./context/AuthContextProvider";
 import ProtectedRoute from "./context/ProtectedRoute";
+import Body from "./components/Body";
 
 function App() {
   const { state } = useAuth();
@@ -27,7 +28,9 @@ function App() {
                 <Dashboard />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route path="body/:id" element={<Body />} />
+          </Route>
           <Route path="register" element={<Register />} />
         </Routes>
       </BrowserRouter>
