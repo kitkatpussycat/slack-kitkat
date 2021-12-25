@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../context/AuthContextProvider";
 import Sidebar from "./Sidebar";
 import Body from "./Body";
+import { Outlet } from "react-router-dom";
 
 function Dashboard() {
   // const { dispatch } = useAuth();
@@ -18,7 +19,7 @@ function Dashboard() {
       <div className="col-span-8">
         {/* <h1 className="text-3xl font-bold underline">DASHBOARD</h1>
         <button onClick={handleLogout}>Logout</button> */}
-        <Body />
+        <Outlet />
       </div>
     </div>
   );

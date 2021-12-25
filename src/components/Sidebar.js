@@ -10,6 +10,7 @@ const Sidebar = () => {
   const { state } = useAuth();
   const [channels, setChannels] = useState([]);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
+  const [userDirectMessage, setUserDirectMessage] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -79,6 +80,14 @@ const Sidebar = () => {
           )}
           <div>
             <h1 className="font-bold">Direct Message</h1>
+            <h1
+              className="cursor-pointer"
+              onClick={() => {
+                setOpenAddUserModal(true);
+              }}
+            >
+              Message User
+            </h1>
           </div>
         </div>
         <div>
