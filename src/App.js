@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import { useAuth } from "./context/AuthContextProvider";
 import ProtectedRoute from "./context/ProtectedRoute";
 import Body from "./components/Body";
+import BodyDirectMessage from "./components/BodyDirectMessage";
 
 function App() {
   const { state } = useAuth();
@@ -30,6 +31,7 @@ function App() {
             }
           >
             <Route path="body/:id" element={<Body />} />
+            <Route path="bodydirectmessage" element={<BodyDirectMessage />} />
           </Route>
           <Route path="register" element={<Register />} />
         </Routes>

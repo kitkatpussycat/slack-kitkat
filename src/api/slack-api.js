@@ -183,3 +183,23 @@ export const getChannelMessages = async (headers, id) => {
 
   return data;
 };
+
+export const getUserMessages = async (headers, id) => {
+  let data = [];
+  try {
+    const res = await axios.get(
+      `${API_URL}/messages?receiver_id=${id}&receiver_class=User`,
+      {
+        headers: {
+          ...headers,
+        },
+      }
+    );
+    data = res.data.data;
+    console.log(res);
+    console.log(data);
+  } catch (error) {
+    console.log(error.response.data.errors);
+  }
+  return data;
+};

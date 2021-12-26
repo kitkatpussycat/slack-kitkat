@@ -4,6 +4,7 @@ import { getChannels } from "../api/slack-api";
 import { useAuth } from "../context/AuthContextProvider";
 import AddUserModal from "./AddUserModal";
 import { Link } from "react-router-dom";
+import SendMessageModal from "./SendMessageModal";
 
 const Sidebar = () => {
   const [openAddChannelModal, setOpenAddChannelModal] = useState(false);
@@ -11,6 +12,7 @@ const Sidebar = () => {
   const [channels, setChannels] = useState([]);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
   const [userDirectMessage, setUserDirectMessage] = useState([]);
+  const [openSendMessageModal, setOpenSendMessageModal] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -83,11 +85,17 @@ const Sidebar = () => {
             <h1
               className="cursor-pointer"
               onClick={() => {
-                setOpenAddUserModal(true);
+                setOpenSendMessageModal(true);
               }}
             >
               Message User
             </h1>
+            {openSendMessageModal && (
+              <SendMessageModal
+                closeSendMessageModal={setOpenSendMessageModal}
+              />
+            )}
+            <Link to={`/dashboard/bodydirectmessage`}>Send Message</Link>
           </div>
         </div>
         <div>

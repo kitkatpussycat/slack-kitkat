@@ -32,6 +32,7 @@ const Body = () => {
   useEffect(() => {
     (async () => {
       const msgs = await getChannelMessages(state.headers, params.id);
+      // console.log(msgs);
       setMessages(msgs);
       // spanRef.current.scrollIntoView({ behavior: "smooth" });
     })();
@@ -76,7 +77,7 @@ const Body = () => {
           (msg, index) => (
             <div
               className={`${
-                msg.sender.id === 1380 ? "text-right" : "text-left"
+                msg.sender.id === state.user.id ? "text-right" : "text-left"
               }`}
             >
               <span className="bg-blue-500 rounded-lg">{msg.body} </span>

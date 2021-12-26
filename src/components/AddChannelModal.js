@@ -17,8 +17,6 @@ const AddChannelModal = ({ closeChannelModal }) => {
     );
     if (status === 200) {
       alert("You created a new channel!");
-      // channelDispatch({ type: 'ADD_CHANNEL', payload: data });
-      // props.setToggleCreateModal((t) => !t);
     }
   };
 

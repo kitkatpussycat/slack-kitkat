@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { getUsers } from "../api/slack-api";
 import { useAuth } from "../context/AuthContextProvider";
 
-const AddUserModal = ({ closeAddUserModal }) => {
+const SendMessageModal = ({ closeSendMessageModal }) => {
   const { state } = useAuth();
   const [listOfUsers, setListOfUsers] = useState([]);
   const [search, setSearch] = useState("");
@@ -57,23 +57,20 @@ const AddUserModal = ({ closeAddUserModal }) => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        {search === "" ? (
-          <div></div>
-        ) : (
-          <div className="mt-5 mb-5 bg-red-500 w-full h-1/2 overflow-y-auto overflow-x-hidden">
-            <div>
-              {filteredUser.map((listOfUser) => (
-                <div
-                  className="hover:text-yellow-500"
-                  key={listOfUser.id}
-                  onClick={(e) => handleAddUsers(e, listOfUser)}
-                >
-                  {listOfUser.uid}
-                </div>
-              ))}
-            </div>
+
+        <div className="mt-5 mb-5 bg-red-500 w-full h-1/2 overflow-y-auto overflow-x-hidden">
+          <div>
+            {filteredUser.map((listOfUser) => (
+              <div
+                className="hover:text-yellow-500"
+                key={listOfUser.id}
+                onClick={(e) => handleAddUsers(e, listOfUser)}
+              >
+                {listOfUser.uid}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
 
         <div className="mt-5 mb-5 bg-slate-500 w-full h-1/4 overflow-y-auto overflow-x-hidden">
           <div>
@@ -95,7 +92,7 @@ const AddUserModal = ({ closeAddUserModal }) => {
         <div className="flex justify-around items-center bg-blue-400 w-full h-auto">
           <button
             className="btn-red mx-0 w-auto"
-            onClick={() => closeAddUserModal(false)}
+            onClick={() => closeSendMessageModal(false)}
           >
             Close
           </button>
@@ -111,4 +108,5 @@ const AddUserModal = ({ closeAddUserModal }) => {
     document.getElementById("portal")
   );
 };
-export default AddUserModal;
+
+export default SendMessageModal;
