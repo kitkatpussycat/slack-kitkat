@@ -48,6 +48,7 @@ const BodyDirectMessage = () => {
   const handleDeleteSelectedUser = (e, s) => {
     e.preventDefault();
     setSelectedUser("");
+    // setSelectedUser(selectedUser.filter((t) => t !== s));
   };
 
   const handleSend = async (e) => {
@@ -74,10 +75,11 @@ const BodyDirectMessage = () => {
   console.log(messages);
 
   return (
-    <div className="bg-purple-500 h-screen grid grid-rows-6 grid-flow-col gap-1">
-      <div className="row-span-1 col-span-2 bg-blue-100 flex justify-start">
+    <div className="bg-slate-300 h-screen grid grid-rows-6 grid-flow-col gap-1">
+      <div className="row-span-1 col-span-2 bg-blue-900 flex justify-start">
         <div>
           <input
+            className="w-full"
             type="text"
             placeholder="search user"
             value={search}
@@ -87,11 +89,11 @@ const BodyDirectMessage = () => {
           {search === "" ? (
             <div></div>
           ) : (
-            <div className="mt-5 mb-5 bg-red-500 w-full h-1/2 overflow-y-auto overflow-x-hidden">
+            <div className="mt-5 mb-5 bg-blue-900 w-full h-1/2 overflow-y-auto overflow-x-hidden">
               <div>
                 {filteredUser.map((listOfUser) => (
                   <div
-                    className="hover:text-yellow-500 flex justify-start"
+                    className="hover:text-slate-300 flex justify-start cursor-pointer"
                     key={listOfUser.id}
                     onClick={(e) => handleSelectedUser(e, listOfUser)}
                   >
@@ -103,46 +105,60 @@ const BodyDirectMessage = () => {
           )}
           <div>
             {/* to:{" "} */}
-            <span>
+            <span className="text-3xl font-bold">
               {selectedUser}
-              <button
-                onClick={(e) => {
-                  handleDeleteSelectedUser(e);
-                }}
-              >
-                X
-              </button>
+              {selectedUser === "" ? (
+                <div></div>
+              ) : (
+                <button
+                  className="bg-red-600 text-sm rounded-lg"
+                  onClick={(e) => {
+                    handleDeleteSelectedUser(e);
+                  }}
+                >
+                  delete
+                </button>
+              )}
             </span>
           </div>
         </div>
       </div>
-      <div className="row-span-4 col-span-2 bg-blue-300 overflow-y-auto overflow-x-hidden">
+      <div className="row-span-4 col-span-2 bg-sky-600 py-2 px-2 overflow-y-auto overflow-x-hidden">
         {" "}
-        {messages.map(
-          //kinopya ko lang
-          (msg, index) => (
-            <div
-              className={`${
-                msg.sender.id === 1380 ? "text-right" : "text-left"
-              }`}
-            >
-              <span className="bg-blue-500 rounded-lg">{msg.body} </span>
-              <span className="text-xs">from {msg.sender.email}</span>
-            </div>
+        {messages === undefined ? (
+          <div></div>
+        ) : (
+          messages.map(
+            //kinopya ko lang
+            (msg, index) => (
+              <div
+                className={`leading-10 ${
+                  msg.sender.id === state.user.id ? "text-right" : "text-left"
+                }`}
+              >
+                <span className="bg-slate-300 rounded-lg py-1 px-1">
+                  {msg.body}{" "}
+                </span>
+                <span className="text-xs">from {msg.sender.email}</span>
+              </div>
+            )
           )
         )}
       </div>
-      <div className="row-span-1 col-span-2 bg-blue-500 flex flex-row">
+      <div className="row-span-1 col-span-2 bg-blue-900 flex flex-row">
         <div className="w-11/12 flex justify-center items-center">
           <textarea
-            className="w-11/12"
+            className="w-11/12 h-1/2"
             placeholder="Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>{" "}
         </div>
         <div className="flex items-center justify-center w-1/12">
-          <button className="bg-red-500" onClick={(e) => handleSend(e)}>
+          <button
+            className="bg-red-600 px-8 font-bold rounded-lg"
+            onClick={(e) => handleSend(e)}
+          >
             Send
           </button>
         </div>

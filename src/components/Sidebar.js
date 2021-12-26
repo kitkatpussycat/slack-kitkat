@@ -5,13 +5,14 @@ import { useAuth } from "../context/AuthContextProvider";
 import AddUserModal from "./AddUserModal";
 import { Link } from "react-router-dom";
 import SendMessageModal from "./SendMessageModal";
+import { getUserMessages, getUsers } from "../api/slack-api";
 
 const Sidebar = () => {
   const [openAddChannelModal, setOpenAddChannelModal] = useState(false);
   const { state } = useAuth();
   const [channels, setChannels] = useState([]);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
-  const [userDirectMessage, setUserDirectMessage] = useState([]);
+
   const [openSendMessageModal, setOpenSendMessageModal] = useState(false);
 
   useEffect(() => {
@@ -35,11 +36,11 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="flex bg-red-500 h-screen flex-col justify-start">
-        <div className="mb-0 bg-yellow-500 pb-8">
-          <h1 className="mt-5 text-3xl font-bold underline">Slack</h1>
+      <div className="flex bg-red-600 h-screen flex-col justify-start">
+        <div className=" bg-red-600 h-1/12">
+          <h1 className="mt-5 mb-5 text-5xl font-bold underline">Slack</h1>
         </div>
-        <div className="bg-blue-500 h-5/6">
+        <div className="bg-blue-900 h-5/6">
           <div className="mb-2 mt-5">
             <h1 className="font-bold">Channel</h1>
             <h1
@@ -98,7 +99,8 @@ const Sidebar = () => {
             <Link to={`/dashboard/bodydirectmessage`}>Send Message</Link>
           </div>
         </div>
-        <div>
+
+        <div className="h-1/12">
           <button className="text-3xl font-bold mt-5" onClick={handleLogout}>
             Logout
           </button>
