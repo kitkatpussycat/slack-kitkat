@@ -29,13 +29,13 @@ function Login() {
   };
   return (
     <div className="flex justify-center items-center h-screen w-screen">
-      <div className="w-1/5 h-1/2 box-shadow">
-        <div className="bg-slate-100 h-full">
+      <div className="w-screen h-screen lg:w-1/5 lg:h-1/2 box-shadow relative">
+        <div className="bg-spider h-full">
           <div className="mb-5 py-10">
-            <h1 className="text-5xl font-semibold">Login</h1>
+            <h1 className="text-5xl font-bold text-black">Slack</h1>
           </div>
           <input
-            className="mb-5 w-4/5 h-10 bg-slate-200 px-1"
+            className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-red-900"
             type="email"
             placeholder="email"
             value={loginAccount.email}
@@ -45,7 +45,7 @@ function Login() {
           />
           <p>{loginAccount.email}</p>
           <input
-            className="mb-10 w-4/5 h-10 bg-slate-200 px-1"
+            className="mb-10 w-4/5 h-10 bg-slate-200 px-1 text-blue-800"
             type="password"
             placeholder="password"
             value={loginAccount.password}
@@ -54,18 +54,15 @@ function Login() {
             }
           />
           <p>{loginAccount.password}</p>
-          <div className="flex justify-center flex-col">
-            <div className="mb-10">
+          <div className="flex justify-center flex-col h-1/3 w-full absolute bottom-0">
+            <div className="mb-0">
               <button className="btn-gradient w-4/5" onClick={handleLogin}>
                 Log-in
               </button>
             </div>
-            <div className="mb-10">
-              <p>-or-</p>
-            </div>
             <div>
               <span>Not a member? </span>
-              <Link className="text-blue-500" to="/register">
+              <Link className="text-blue-100 hover:bg-blue-900" to="/register">
                 Sign up Now!
               </Link>
             </div>

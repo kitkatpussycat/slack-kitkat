@@ -36,14 +36,14 @@ function Register() {
       {loading ? (
         <p>Loading ....</p>
       ) : (
-        <div className="w-1/5 h-1/2 box-shadow">
-          <div className="bg-slate-100 h-full">
+        <div className="w-screen h-screen lg:w-1/5 lg:h-1/2 box-shadow relative">
+          <div className="bg-spider h-full">
             <div className="mb-5 py-10">
-              <h1 className="text-5xl font-semibold">Sign up</h1>
+              <h1 className="text-5xl font-bold text-black">Slack</h1>
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 bg-slate-200 px-1"
+                className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-red-800"
                 type="email"
                 placeholder="email"
                 value={registerAccount.email}
@@ -57,7 +57,7 @@ function Register() {
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 bg-slate-200 px-1"
+                className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-blue-900"
                 type="password"
                 value={registerAccount.password}
                 placeholder="password"
@@ -71,7 +71,7 @@ function Register() {
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 bg-slate-200 px-1"
+                className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-blue-900"
                 type="password"
                 placeholder="confirm password"
                 value={registerAccount.confirmPassword}
@@ -88,7 +88,7 @@ function Register() {
                 Sign up
               </button>
             </div>
-            <div>
+            <div className="absolute bottom-0 w-full hover:bg-blue-900">
               {error.length ? error.map((err) => <p>{err}</p>) : null}
               {flash && <p>{flash}</p>}
               <span>Back to </span>

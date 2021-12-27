@@ -16,7 +16,7 @@ function Dashboard() {
       <div className="row-span-3">
         <Sidebar />
       </div>
-      <div className="col-span-8">
+      <div className="col-span-8 h-screen bg-spider">
         {/* <h1 className="text-3xl font-bold underline">DASHBOARD</h1>
         <button onClick={handleLogout}>Logout</button> */}
         <Outlet />

@@ -52,16 +52,18 @@ const Body = () => {
   console.log([messages]);
 
   return (
-    <div className="bg-purple-500 h-screen grid grid-rows-6 grid-flow-col gap-1">
-      <div className="row-span-1 col-span-2 bg-blue-100 flex justify-around text-3xl">
-        <div className="font-bold">{channelData.name}</div>
-        <div
-          className="cursor-pointer font-bold"
-          onClick={() => {
-            setOpenAddMemberModal(true);
-          }}
-        >
-          Add Member
+    <div className="bg-slate-300 h-screen grid grid-rows-6 grid-flow-col gap-1">
+      <div className="row-span-1 col-span-2 bg-blue-800 flex justify-start text-3xl">
+        <div className="font-bold">
+          {channelData.name}
+          <button
+            className="cursor-pointer font-bold text-sm bg-red-900 rounded-lg px-2 mx-2"
+            onClick={() => {
+              setOpenAddMemberModal(true);
+            }}
+          >
+            Add Member
+          </button>
         </div>
         {openAddMemberModal && (
           <AddMemberModal
@@ -70,33 +72,43 @@ const Body = () => {
           />
         )}
       </div>
-      <div className="row-span-4 col-span-2 bg-blue-300 overflow-y-auto overflow-x-hidden">
+      <div className="row-span-4 col-span-2 bg-spider overflow-y-auto overflow-x-hidden">
         {" "}
         {messages.map(
           //kinopya ko lang
           (msg, index) => (
             <div
-              className={`${
+              className={` text-black ${
                 msg.sender.id === state.user.id ? "text-right" : "text-left"
               }`}
             >
-              <span className="bg-blue-500 rounded-lg">{msg.body} </span>
-              <span className="text-xs">from {msg.sender.email}</span>
+              <p className="text-slate-300 text-xs">{msg.sender.email}</p>
+              <div className="leading-10">
+                <span className="bg-slate-300 rounded-lg py-1 px-1 mx-3 lg:text-xl">
+                  {msg.body}{" "}
+                </span>
+                {/* <span className="text-xs text-slate-300">
+                  at {msg.sender.created_at}
+                </span> */}
+              </div>
             </div>
           )
         )}
       </div>
-      <div className="row-span-1 col-span-2 bg-blue-500 flex flex-row">
-        <div className="w-11/12 flex justify-center items-center">
+      <div className="row-span-1 col-span-2 bg-blue-900 flex flex-row">
+        <div className="w-5/6 lg:w-11/12 flex justify-center items-center">
           <textarea
-            className="w-11/12"
-            placeholder="Message"
+            className="w-11/12 h-1/2 bg-slate-300 text-black"
+            placeholder={`Message ${channelData.name}`}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>{" "}
         </div>
-        <div className="flex items-center justify-center w-1/12">
-          <button className="bg-red-500" onClick={(e) => handleSend(e)}>
+        <div className="flex items-center justify-center w-1/6 lg:w-1/12">
+          <button
+            className="bg-spider lg:px-8 lg:font-bold rounded-lg"
+            onClick={(e) => handleSend(e)}
+          >
             Send
           </button>
         </div>

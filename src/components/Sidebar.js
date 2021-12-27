@@ -36,8 +36,8 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="flex bg-red-600 h-screen flex-col justify-start">
-        <div className=" bg-red-600 h-1/12">
+      <div className="flex bg-spider h-screen flex-col justify-start">
+        <div className="h-1/12">
           <h1 className="mt-5 mb-5 text-5xl font-bold underline">Slack</h1>
         </div>
         <div className="bg-blue-900 h-5/6">

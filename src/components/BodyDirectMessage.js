@@ -76,10 +76,10 @@ const BodyDirectMessage = () => {
 
   return (
     <div className="bg-slate-300 h-screen grid grid-rows-6 grid-flow-col gap-1">
-      <div className="row-span-1 col-span-2 bg-blue-900 flex justify-start">
+      <div className="row-span-1 col-span-2 bg-blue-800 flex justify-start">
         <div>
           <input
-            className="w-full"
+            className="w-full text-black"
             type="text"
             placeholder="search user"
             value={search}
@@ -89,7 +89,7 @@ const BodyDirectMessage = () => {
           {search === "" ? (
             <div></div>
           ) : (
-            <div className="mt-5 mb-5 bg-blue-900 w-full h-1/2 overflow-y-auto overflow-x-hidden">
+            <div className="mt-5 mb-5 bg-blue-800 w-full h-1/2 overflow-y-auto overflow-x-hidden">
               <div>
                 {filteredUser.map((listOfUser) => (
                   <div
@@ -105,7 +105,7 @@ const BodyDirectMessage = () => {
           )}
           <div>
             {/* to:{" "} */}
-            <span className="text-3xl font-bold">
+            <span className="lg:text-3xl font-bold">
               {selectedUser}
               {selectedUser === "" ? (
                 <div></div>
@@ -123,7 +123,7 @@ const BodyDirectMessage = () => {
           </div>
         </div>
       </div>
-      <div className="row-span-4 col-span-2 bg-sky-600 py-2 px-2 overflow-y-auto overflow-x-hidden">
+      <div className="row-span-4 col-span-2 bg-spider overflow-y-auto overflow-x-hidden">
         {" "}
         {messages === undefined ? (
           <div></div>
@@ -132,31 +132,34 @@ const BodyDirectMessage = () => {
             //kinopya ko lang
             (msg, index) => (
               <div
-                className={`leading-10 ${
+                className={`leading-10 text-black ${
                   msg.sender.id === state.user.id ? "text-right" : "text-left"
                 }`}
               >
-                <span className="bg-slate-300 rounded-lg py-1 px-1">
+                {/* <span className="text-xs text-slate-300">
+                  {msg.sender.email}
+                </span>{" "}
+                <br /> */}
+                <span className="bg-slate-300 rounded-lg py-1 px-1 mx-3 lg:text-xl">
                   {msg.body}{" "}
                 </span>
-                <span className="text-xs">from {msg.sender.email}</span>
               </div>
             )
           )
         )}
       </div>
       <div className="row-span-1 col-span-2 bg-blue-900 flex flex-row">
-        <div className="w-11/12 flex justify-center items-center">
+        <div className="w-5/6 lg:w-11/12 flex justify-center items-center">
           <textarea
-            className="w-11/12 h-1/2"
+            className="w-11/12 lg:w-11/12 h-1/2 bg-slate-300 text-black"
             placeholder="Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>{" "}
         </div>
-        <div className="flex items-center justify-center w-1/12">
+        <div className="flex items-center justify-start w-1/6 lg:w-1/12">
           <button
-            className="bg-red-600 px-8 font-bold rounded-lg"
+            className="bg-spider lg:px-8 lg:font-bold rounded-lg text-sm"
             onClick={(e) => handleSend(e)}
           >
             Send
