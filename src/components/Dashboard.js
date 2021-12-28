@@ -12,7 +12,7 @@ function Dashboard() {
   //   });
   // };
   return (
-    <div className="grid grid-rows-3 grid-flow-col gap-1">
+    <div className="grid grid-rows-3 grid-flow-col gap-0">
       <div className="row-span-3">
         <Sidebar />
       </div>

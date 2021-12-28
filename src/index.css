@@ -2,31 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  height: 100%;
+}
 body {
-  color: rgba(255, 255, 255, 0.795);
+  background-image: linear-gradient(
+    to top,
+    #fd576c,
+    #fe5b68,
+    #fe5f64,
+    #ff6361,
+    #ff675d,
+    #fc645a,
+    #fa6158,
+    #f75e55,
+    #f15253,
+    #eb4652,
+    #e53950,
+    #de2a4f
+  );
+  background-size: 100% 100%;
+  min-height: 100%;
+  width: 100%;
   overflow: hidden;
+  /* background-image: url("https://image.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2515.jpg"); */
+  color: white;
 }
 
-.bg-spider {
-  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYxK1B9zelfjY8T1FidNnc8cjPXO78mmG1paJimsONDUIyRWmbe37CfsSb-yQ9BjaNv6M&usqp=CAU"); */
+/* .bg-spider {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYxK1B9zelfjY8T1FidNnc8cjPXO78mmG1paJimsONDUIyRWmbe37CfsSb-yQ9BjaNv6M&usqp=CAU");
   background-image: url("https://t4.ftcdn.net/jpg/02/81/81/89/240_F_281818990_5pCzKbsTasWbwaJAHCtiJpyWLeWkfqwb.jpg");
   background-repeat: no-repeat;
-  /* background-size: 1580px 700px; */
+  background-size: 1580px 700px;
   background-size: 100% 100%;
-  /* background-size: cover; */
-}
+  background-size: cover;
+} */
 
 .box-shadow {
   box-shadow: -4px 4px 24px -5px rgba(0, 0, 0, 0.84);
 }
 
 .card {
-  /* backdrop-filter: blur(5px); */
-  /* background: rgba(255, 255, 255, 0.15); */
-  /* background: yellow; */
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  /* box-shadow: rgba(177, 123, 123, 0.35) 0px 5px 15px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+  background: rgba(255, 255, 255, 0.15);
+  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }

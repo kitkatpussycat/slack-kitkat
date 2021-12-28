@@ -52,12 +52,12 @@ const Body = () => {
   console.log([messages]);
 
   return (
-    <div className="bg-slate-300 h-screen grid grid-rows-6 grid-flow-col gap-1">
-      <div className="row-span-1 col-span-2 bg-blue-800 flex justify-start text-3xl">
+    <div className=" h-screen grid grid-rows-6 grid-flow-col gap-4 px-0 py-3 mx-2 my-1">
+      <div className="row-span-1 col-span-2 card flex justify-start lg:text-3xl">
         <div className="font-bold">
           {channelData.name}
           <button
-            className="cursor-pointer font-bold text-sm bg-red-900 rounded-lg px-2 mx-2"
+            className="cursor-pointer font-bold text-sm bg-pink-600 rounded-lg px-2 mx-2"
             onClick={() => {
               setOpenAddMemberModal(true);
             }}
@@ -72,19 +72,19 @@ const Body = () => {
           />
         )}
       </div>
-      <div className="row-span-4 col-span-2 bg-spider overflow-y-auto overflow-x-hidden">
+      <div className="row-span-4 col-span-2 overflow-y-auto overflow-x-hidden card">
         {" "}
         {messages.map(
           //kinopya ko lang
           (msg, index) => (
             <div
-              className={` text-black ${
+              className={`  ${
                 msg.sender.id === state.user.id ? "text-right" : "text-left"
               }`}
             >
-              <p className="text-slate-300 text-xs">{msg.sender.email}</p>
+              <p className="text-slate-300 text-xs px-2">{msg.sender.email}</p>
               <div className="leading-10">
-                <span className="bg-slate-300 rounded-lg py-1 px-1 mx-3 lg:text-xl">
+                <span className="card rounded-lg py-1 px-1 mx-3 lg:text-xl">
                   {msg.body}{" "}
                 </span>
                 {/* <span className="text-xs text-slate-300">
@@ -95,7 +95,7 @@ const Body = () => {
           )
         )}
       </div>
-      <div className="row-span-1 col-span-2 bg-blue-900 flex flex-row">
+      <div className="row-span-1 col-span-2 card flex flex-row">
         <div className="w-5/6 lg:w-11/12 flex justify-center items-center">
           <textarea
             className="w-11/12 h-1/2 bg-slate-300 text-black"
@@ -106,7 +106,7 @@ const Body = () => {
         </div>
         <div className="flex items-center justify-center w-1/6 lg:w-1/12">
           <button
-            className="bg-spider lg:px-8 lg:font-bold rounded-lg"
+            className="bg-pink-600 px-1 lg:px-8 lg:font-bold text-xs lg:text-lg rounded-full"
             onClick={(e) => handleSend(e)}
           >
             Send

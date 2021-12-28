@@ -36,13 +36,13 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="flex bg-spider h-screen flex-col justify-start">
-        <div className="h-1/12">
-          <h1 className="mt-5 mb-5 text-5xl font-bold underline">Slack</h1>
+      <div className=" h-screen  grid grid-rows-6 gap-4 py-3 lg:py-3 px-0 lg:px-5 mx-2 my-1">
+        <div className=" card rounded-lg row-span-1 col-span-1 flex justify-center items-center">
+          <h1 className=" text-lg lg:text-5xl font-bold underline">Slack</h1>
         </div>
-        <div className="bg-blue-900 h-5/6">
+        <div className="card rounded-lg row-span-4 overflow-y-auto overflow-x-hidden">
           <div className="mb-2 mt-5">
-            <h1 className="font-bold">Channel</h1>
+            <h1 className="font-bold">Channels</h1>
             <h1
               className="cursor-pointer underline"
               onClick={() => {
@@ -100,8 +100,11 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="h-1/12">
-          <button className="text-3xl font-bold mt-5" onClick={handleLogout}>
+        <div className=" card rounded-lg row-span-1 flex items-center justify-center">
+          <button
+            className="text-md lg:text-3xl font-bold bg-pink-600 py-3 px-5 rounded-full"
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </div>
