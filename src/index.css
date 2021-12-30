@@ -6,27 +6,36 @@ html {
   height: 100%;
 }
 body {
-  background-image: linear-gradient(
-    to top,
-    #fd576c,
-    #fe5b68,
-    #fe5f64,
-    #ff6361,
-    #ff675d,
-    #fc645a,
-    #fa6158,
-    #f75e55,
-    #f15253,
-    #eb4652,
-    #e53950,
-    #de2a4f
-  );
+  /* background-image: linear-gradient(
+    to right top,
+    #a187f1,
+    #b18ff2,
+    #c098f3,
+    #cda1f4,
+    #d9abf5,
+    #e3b1f3,
+    #ebb7f0,
+    #f2beef,
+    #f8c2ea,
+    #fcc7e6,
+    #fecde3,
+    #ffd3e2
+  ); */
   background-size: 100% 100%;
   min-height: 100%;
   width: 100%;
-  overflow: hidden;
-  /* background-image: url("https://image.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2515.jpg"); */
-  color: white;
+  /* overflow: hidden; */
+  color: black;
+  font-family: "Martel Sans", sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-family: "Roboto", sans-serif;
+  background-color: #ffd3e2;
+  background-image: radial-gradient(
+      at 47% 33%,
+      hsl(254.72, 79%, 74%) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 82% 65%, hsl(285.45, 73%, 82%) 0, transparent 55%);
 }
 
 /* .bg-spider {
@@ -48,10 +57,26 @@ body {
   -webkit-backdrop-filter: blur(15px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18); */
-  background: rgba(255, 255, 255, 0.15);
-  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+
+  /* background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+
+  backdrop-filter: blur(25px) saturate(79%);
+  -webkit-backdrop-filter: blur(25px) saturate(79%);
+  background-color: rgba(189, 16, 224, 0.17);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+.card-f {
+  background: rgba(229, 11, 163, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -81,18 +106,22 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: gray;
+  background: white;
   border-radius: 20px;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   background: white;
-}
+} */
 
 @layer base {
   .footer {
     @apply flex-row justify-center items-center;
+  }
+
+  .bg-gradient {
+    @apply bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white;
   }
 }
 
@@ -103,6 +132,6 @@ body {
   }
 
   .btn-gradient {
-    @apply bg-gradient-to-r from-blue-900 to-red-900 font-bold py-2 px-4 rounded mx-5;
+    @apply bg-gradient-to-r from-purple-500 to-fuchsia-500 font-bold py-2 px-4 rounded mx-5 text-white;
   }
 }

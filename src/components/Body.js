@@ -57,7 +57,7 @@ const Body = () => {
         <div className="font-bold">
           {channelData.name}
           <button
-            className="cursor-pointer font-bold text-sm bg-pink-600 rounded-lg px-2 mx-2"
+            className="cursor-pointer font-bold text-sm btn-gradient rounded-full px-2 mx-2"
             onClick={() => {
               setOpenAddMemberModal(true);
             }}
@@ -74,31 +74,35 @@ const Body = () => {
       </div>
       <div className="row-span-4 col-span-2 overflow-y-auto overflow-x-hidden card">
         {" "}
-        {messages.map(
-          //kinopya ko lang
-          (msg, index) => (
-            <div
-              className={`  ${
-                msg.sender.id === state.user.id ? "text-right" : "text-left"
-              }`}
-            >
-              <p className="text-slate-300 text-xs px-2">{msg.sender.email}</p>
-              <div className="leading-10">
-                <span className="card rounded-lg py-1 px-1 mx-3 lg:text-xl">
-                  {msg.body}{" "}
-                </span>
-                {/* <span className="text-xs text-slate-300">
+        {messages === undefined ? (
+          <div></div>
+        ) : (
+          messages.map(
+            //kinopya ko lang
+            (msg, index) => (
+              <div
+                className={`  ${
+                  msg.sender.id === state.user.id ? "text-right" : "text-left"
+                }`}
+              >
+                <p className=" text-xs px-2">{msg.sender.email}</p>
+                <div className="leading-14">
+                  <span className="bg-gradient rounded-lg py-1 px-1 mx-3 lg:text-xl">
+                    {msg.body}{" "}
+                  </span>
+                  {/* <span className="text-xs text-slate-300">
                   at {msg.sender.created_at}
                 </span> */}
+                </div>
               </div>
-            </div>
+            )
           )
         )}
       </div>
       <div className="row-span-1 col-span-2 card flex flex-row">
         <div className="w-5/6 lg:w-11/12 flex justify-center items-center">
           <textarea
-            className="w-11/12 h-1/2 bg-slate-300 text-black"
+            className="w-11/12 h-1/2 text-black focus:outline-none"
             placeholder={`Message ${channelData.name}`}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -106,7 +110,7 @@ const Body = () => {
         </div>
         <div className="flex items-center justify-center w-1/6 lg:w-1/12">
           <button
-            className="bg-pink-600 px-1 lg:px-8 lg:font-bold text-xs lg:text-lg rounded-full"
+            className="btn-gradient px-1 lg:px-8 lg:font-bold text-xs lg:text-lg rounded-full"
             onClick={(e) => handleSend(e)}
           >
             Send

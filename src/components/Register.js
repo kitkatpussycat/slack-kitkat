@@ -37,13 +37,13 @@ function Register() {
         <p>Loading ....</p>
       ) : (
         <div className="w-screen h-screen lg:w-1/5 lg:h-1/2 box-shadow relative">
-          <div className="bg-spider h-full">
+          <div className="card h-full">
             <div className="mb-5 py-10">
               <h1 className="text-5xl font-bold text-black">Slack</h1>
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-red-800"
+                className="mb-5 w-4/5 h-10 px-1"
                 type="email"
                 placeholder="email"
                 value={registerAccount.email}
@@ -57,7 +57,7 @@ function Register() {
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-blue-900"
+                className="mb-5 w-4/5 h-10 px-1"
                 type="password"
                 value={registerAccount.password}
                 placeholder="password"
@@ -71,7 +71,7 @@ function Register() {
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-blue-900"
+                className="mb-5 w-4/5 h-10 px-1"
                 type="password"
                 placeholder="confirm password"
                 value={registerAccount.confirmPassword}
@@ -84,15 +84,18 @@ function Register() {
               />
             </div>
             <div className="mb-10">
-              <button className="btn-gradient w-4/5" onClick={handleRegister}>
+              <button
+                className="card px-5 py-2 w-4/5 hover:bg-white hover:text-black transition-all"
+                onClick={handleRegister}
+              >
                 Sign up
               </button>
             </div>
-            <div className="absolute bottom-0 w-full hover:bg-blue-900">
+            <div className="absolute bottom-0 w-full hover:bg-white hover:text-black">
               {error.length ? error.map((err) => <p>{err}</p>) : null}
               {flash && <p>{flash}</p>}
               <span>Back to </span>
-              <Link className="text-blue-500" to="/">
+              <Link className="text-white hover:text-black" to="/">
                 Login
               </Link>
             </div>

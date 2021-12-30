@@ -63,7 +63,7 @@ const AddMemberModal = ({ closeAddMemberModal, channelId }) => {
 
   return ReactDOM.createPortal(
     <div className="modalBackGround">
-      <div className="card bg-blue-900 px-20 py-5 w-screen h-screen lg:w-1/4 lg:h-3/4 relative">
+      <div className="bg-gradient px-20 py-5 w-screen h-screen lg:w-1/4 lg:h-3/4 relative">
         <div className="title mb-5">
           <h1 className="text-center font-bold">Add New User</h1>
         </div>
@@ -77,7 +77,7 @@ const AddMemberModal = ({ closeAddMemberModal, channelId }) => {
           />
         </div>
 
-        <div className="mt-5 mb-5 bg-spider w-full h-1/2 overflow-y-auto overflow-x-hidden">
+        <div className="mt-5 mb-5 card w-full h-1/2 overflow-y-auto overflow-x-hidden">
           <div>
             {filteredUser.map((listOfUser) => (
               <div
@@ -91,7 +91,7 @@ const AddMemberModal = ({ closeAddMemberModal, channelId }) => {
           </div>
         </div>
 
-        <div className="mt-5 mb-5 bg-slate-500 w-full h-1/4 overflow-y-auto overflow-x-hidden">
+        <div className="mt-5 mb-5 card w-full h-1/4 overflow-y-auto overflow-x-hidden">
           <div>
             {selectedUsers &&
               selectedUsers.map((selectedUser) => (
@@ -110,13 +110,13 @@ const AddMemberModal = ({ closeAddMemberModal, channelId }) => {
 
         <div className="flex justify-around items-center w-full absolute bottom-0 left-0 py-5">
           <button
-            className="bg-spider mx-0 px-5"
+            className="card mx-0 px-5"
             onClick={() => closeAddMemberModal(false)}
           >
             Close
           </button>
           <button
-            className="bg-spider mx-0 px-5"
+            className="card mx-0 px-5"
             onClick={(e) => handleAddMember(selectedUsers.id)}
           >
             Add

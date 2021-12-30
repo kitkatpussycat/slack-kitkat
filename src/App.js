@@ -12,7 +12,7 @@ function App() {
   const { state } = useAuth();
   let redirectRoute;
   if (state.login) {
-    redirectRoute = <Navigate replace to="dashboard" />;
+    redirectRoute = <Navigate replace to="dashboard/bodydirectmessage" />;
   } else {
     redirectRoute = <Login />;
   }

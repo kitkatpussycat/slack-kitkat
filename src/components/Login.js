@@ -29,13 +29,13 @@ function Login() {
   };
   return (
     <div className="flex justify-center items-center h-screen w-screen">
-      <div className="w-screen h-screen lg:w-1/5 lg:h-1/2 box-shadow relative">
-        <div className="card rounded-full h-full">
+      <div className="w-screen h-screen lg:w-1/5 lg:h-1/2 relative">
+        <div className="card h-full rounded-lg">
           <div className="mb-5 py-10">
             <h1 className="text-5xl font-bold">Slack</h1>
           </div>
           <input
-            className="mb-5 w-4/5 h-10 bg-slate-200 px-1 text-red-900"
+            className="mb-5 w-4/5 h-10 px-1"
             type="email"
             placeholder="email"
             value={loginAccount.email}
@@ -45,7 +45,7 @@ function Login() {
           />
           <p>{loginAccount.email}</p>
           <input
-            className="mb-10 w-4/5 h-10 bg-slate-200 px-1 text-blue-800"
+            className="mb-10 w-4/5 h-10 px-1"
             type="password"
             placeholder="password"
             value={loginAccount.password}
@@ -57,7 +57,7 @@ function Login() {
           <div className="flex justify-center flex-col h-1/3 w-full absolute bottom-0">
             <div className="mb-0">
               <button
-                className="bg-pink-600 px-5 py-2 w-4/5 rounded-lg"
+                className="card px-5 py-2 w-4/5 rounded-lg hover:bg-white hover:text-black transition-all"
                 onClick={handleLogin}
               >
                 Log-in
@@ -65,7 +65,10 @@ function Login() {
             </div>
             <div>
               <span>Not a member? </span>
-              <Link className="text-blue-100 hover:bg-pink-600" to="/register">
+              <Link
+                className="text-white hover:font-bold hover:underline"
+                to="/register"
+              >
                 Sign up Now!
               </Link>
             </div>
