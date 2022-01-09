@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  height: 100%;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
+
+/* html {
+  height: 100%;
+} */
 body {
   /* background-image: linear-gradient(
     to right top,
@@ -25,7 +31,9 @@ body {
   min-height: 100%;
   width: 100%;
   /* overflow: hidden; */
-  color: black;
+  /* color: rgb(39, 37, 37); */
+  /* color: rgb(32, 32, 44); */
+  color: #023047;
   font-family: "Martel Sans", sans-serif;
   font-family: "Open Sans Condensed", sans-serif;
   font-family: "Roboto", sans-serif;
@@ -38,37 +46,19 @@ body {
     radial-gradient(at 82% 65%, hsl(285.45, 73%, 82%) 0, transparent 55%);
 }
 
-/* .bg-spider {
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYxK1B9zelfjY8T1FidNnc8cjPXO78mmG1paJimsONDUIyRWmbe37CfsSb-yQ9BjaNv6M&usqp=CAU");
-  background-image: url("https://t4.ftcdn.net/jpg/02/81/81/89/240_F_281818990_5pCzKbsTasWbwaJAHCtiJpyWLeWkfqwb.jpg");
-  background-repeat: no-repeat;
-  background-size: 1580px 700px;
-  background-size: 100% 100%;
-  background-size: cover;
-} */
+.text-sidebar {
+  font-size: 18px;
+}
 
 .box-shadow {
   box-shadow: -4px 4px 24px -5px rgba(0, 0, 0, 0.84);
 }
 
 .card {
-  /* box-shadow: rgba(177, 123, 123, 0.35) 0px 5px 15px;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18); */
-
-  /* background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18); */
-
   backdrop-filter: blur(25px) saturate(79%);
   -webkit-backdrop-filter: blur(25px) saturate(79%);
   background-color: rgba(189, 16, 224, 0.17);
-  border-radius: 12px;
+  /* border-radius: 12px; */
   border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
@@ -79,6 +69,14 @@ body {
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.card-g {
+  backdrop-filter: blur(25px) saturate(149%);
+  -webkit-backdrop-filter: blur(25px) saturate(149%);
+  background-color: rgba(255, 255, 255, 0.21);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
 .modalBackGround {
@@ -95,7 +93,7 @@ body {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
 
 /* Track */
@@ -106,7 +104,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: white;
+  background: rgba(189, 16, 224, 0.17);
   border-radius: 20px;
 }
 

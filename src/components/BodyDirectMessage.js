@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { sendMessage } from "../api/slack-api";
 import { getUsers } from "../api/slack-api";
 import { useAuth } from "../context/AuthContextProvider";
 import { getUserMessages } from "../api/slack-api";
+import { FiSend } from "react-icons/fi";
+import { BsMenuApp } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const BodyDirectMessage = () => {
   const { state } = useAuth();
@@ -14,6 +17,17 @@ const BodyDirectMessage = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
+  ///////////////////////////////////////////////from stockoverflow..
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  /////////////////////////////////////////////////////////
   useEffect(() => {
     (async () => {
       const users = await getUsers(state.headers);
@@ -52,15 +66,21 @@ const BodyDirectMessage = () => {
   };
 
   const handleSend = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     if (selectedUser === "" && message === "") {
       alert("Please enter an email or message");
     } else {
       await sendMessage(state.headers, directUser.id, "User", message);
-      setSelectedUser("");
-      setDirectUser("");
+      // setSelectedUser("");
+      // setDirectUser("");
       setMessage("");
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key == "Enter") {
+      handleSend();
     }
   };
 
@@ -73,13 +93,24 @@ const BodyDirectMessage = () => {
     })();
   }, [directUser.id]);
   console.log(messages);
+  console.log(selectedUser);
+
+  const getDate = (date) => {
+    let r = new Date(date);
+    return <span>{r.toDateString()}</span>;
+  };
+
+  const handleReload = async (e) => {
+    const msgs = await getUserMessages(state.headers, directUser.id);
+    setMessages(msgs);
+  };
 
   return (
-    <div className=" h-screen grid grid-rows-6 grid-flow-col gap-4 px-0 py-3 mx-2 my-1">
+    <div className=" h-screen grid grid-rows-6 grid-flow-col lg:gap-2">
       <div className="row-span-1 col-span-2 card flex justify-start lg:text-xl">
         <div>
           <input
-            className="w-full text-black"
+            className="w-full text-black mx-2 my-2"
             type="text"
             placeholder="search user"
             value={search}
@@ -89,7 +120,7 @@ const BodyDirectMessage = () => {
           {search === "" ? (
             <div></div>
           ) : (
-            <div className="mt-5 mb-5 card w-full h-1/2 overflow-y-auto overflow-x-hidden">
+            <div className="mx-2 mb-5 card w-full h-1/2 overflow-y-auto overflow-x-hidden">
               <div>
                 {filteredUser.map((listOfUser) => (
                   <div
@@ -105,7 +136,7 @@ const BodyDirectMessage = () => {
           )}
           <div>
             {/* to:{" "} */}
-            <span className="lg:text-xl font-bold">
+            <span className="md:text-xl lg:text-xl font-bold mx-2">
               {selectedUser}
               {selectedUser === "" ? (
                 <div></div>
@@ -120,6 +151,14 @@ const BodyDirectMessage = () => {
                 </button>
               )}
             </span>
+            <button className="lg:hidden">
+              <Link to={`/dashboard/sidebar`}>
+                <BsMenuApp />
+              </Link>
+            </button>
+            <button className="btn-gradient" onClick={handleReload}>
+              pindutin ako
+            </button>
           </div>
         </div>
       </div>
@@ -132,35 +171,45 @@ const BodyDirectMessage = () => {
             //kinopya ko lang
             (msg, index) => (
               <div
-                className={`leading-14 text-black ${
+                className={`mb-5 ${
                   msg.sender.id === state.user.id ? "text-right" : "text-left"
                 }`}
               >
-                {/* <span className="text-xs text-slate-300">
-                  {msg.sender.email}
-                </span>{" "}
-                <br /> */}
-                <span className="card rounded-lg py-1 px-1 mx-3 lg:text-xl">
+                <p className="text-xs py-0 mx-3">
+                  {getDate(msg.sender.created_at)}
+                </p>{" "}
+                <span className="card-g rounded-3xl py-1 px-5 mx-3 lg:text-xl">
                   {msg.body}{" "}
                 </span>
               </div>
             )
           )
         )}
+        <div ref={messagesEndRef} />
       </div>
       <div className="row-span-1 col-span-2 card flex flex-row">
         <div className="w-full lg:w-full flex justify-center items-center">
           <textarea
             className="w-11/12 lg:w-11/12 h-1/2 text-black mx-1"
-            placeholder="Message"
+            placeholder={`Message  ${selectedUser}`}
+            // ${
+            //   selectedUser === "" ? (
+            //     <span>lala</span>
+            //   ) : (
+            //     <span>{selectedUser}</span>
+            //   )
+            // }
+            // `}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
           ></textarea>{" "}
           <button
-            className="btn-gradient px-0 py-0 text-xs mx-0 lg:font-bold lg:text-lg"
+            className=" px-0 py-0 text-xs mx-1 text-white lg:font-bold lg:text-3xl"
             onClick={(e) => handleSend(e)}
           >
-            Send
+            <FiSend />
+            {/* Send */}
           </button>
         </div>
         {/* <div className="flex items-center justify-start w-1/6 lg:w-1/12">

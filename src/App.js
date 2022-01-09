@@ -7,6 +7,7 @@ import { useAuth } from "./context/AuthContextProvider";
 import ProtectedRoute from "./context/ProtectedRoute";
 import Body from "./components/Body";
 import BodyDirectMessage from "./components/BodyDirectMessage";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const { state } = useAuth();
@@ -18,7 +19,7 @@ function App() {
   }
   console.log("login", state.login);
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={redirectRoute} />
@@ -32,11 +33,11 @@ function App() {
           >
             <Route path="body/:id" element={<Body />} />
             <Route path="bodydirectmessage" element={<BodyDirectMessage />} />
+            <Route path="sidebar" element={<Sidebar />}></Route>
           </Route>
           <Route path="register" element={<Register />} />
         </Routes>
       </BrowserRouter>
-      ,
     </div>
   );
 }

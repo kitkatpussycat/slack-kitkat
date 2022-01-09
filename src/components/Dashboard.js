@@ -12,13 +12,15 @@ function Dashboard() {
   //   });
   // };
   return (
-    <div className="grid grid-rows-3 grid-flow-col gap-0">
-      <div className="row-span-3">
-        <Sidebar />
-      </div>
-      <div className="col-span-8 h-screen">
-        {/* <h1 className="text-3xl font-bold underline">DASHBOARD</h1> */}
-        <Outlet />
+    <div className="h-screen">
+      <div className="grid grid-cols-12 gap-2 p-3">
+        <div className="hidden md:flex lg:flex md:col-span-3 lg:col-span-2">
+          <Sidebar />
+        </div>
+        <div className="col-span-12 md:col-span-9 lg:col-span-10">
+          {/* <h1 className="text-3xl font-bold underline">DASHBOARD</h1> */}
+          <Outlet />
+        </div>
       </div>
     </div>
   );

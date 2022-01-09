@@ -27,6 +27,19 @@ module.exports = {
       12: "3rem",
       14: "4rem",
     },
+    screens: {
+      xs: "350px",
+      // => @media (min-width: 640px) { ... }
+
+      sm: "640px",
+      // => @media (min-width: 1024px) { ... }
+
+      md: "768px",
+      // => @media (min-width: 1280px) { ... }
+
+      lg: "1024px",
+      // => @media (min-width: 1280px) { ... }
+    },
   },
   plugins: [],
 };

@@ -36,14 +36,14 @@ function Register() {
       {loading ? (
         <p>Loading ....</p>
       ) : (
-        <div className="w-screen h-screen lg:w-1/5 lg:h-1/2 box-shadow relative">
-          <div className="card h-full">
-            <div className="mb-5 py-10">
+        <div className="w-screen h-screen lg:w-1/5 lg:h-1/2 relative">
+          <div className="card h-full w-full rounded-lg flex flex-col items-center py-20">
+            <div className="mb-5">
               <h1 className="text-5xl font-bold text-black">Slack</h1>
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 px-1"
+                className="mb-5 w-full h-10 px-1"
                 type="email"
                 placeholder="email"
                 value={registerAccount.email}
@@ -57,7 +57,7 @@ function Register() {
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 px-1"
+                className="mb-5 w-full h-10 px-1"
                 type="password"
                 value={registerAccount.password}
                 placeholder="password"
@@ -71,7 +71,7 @@ function Register() {
             </div>
             <div>
               <input
-                className="mb-5 w-4/5 h-10 px-1"
+                className="mb-5 w-full h-10 px-1"
                 type="password"
                 placeholder="confirm password"
                 value={registerAccount.confirmPassword}
@@ -85,13 +85,13 @@ function Register() {
             </div>
             <div className="mb-10">
               <button
-                className="card px-5 py-2 w-4/5 hover:bg-white hover:text-black transition-all"
+                className="card px-20 py-2 w-full hover:bg-white hover:text-black transition-all"
                 onClick={handleRegister}
               >
                 Sign up
               </button>
             </div>
-            <div className="absolute bottom-0 w-full hover:bg-white hover:text-black">
+            <div className="absolute bottom-0 w-full text-center hover:bg-gradient">
               {error.length ? error.map((err) => <p>{err}</p>) : null}
               {flash && <p>{flash}</p>}
               <span>Back to </span>
