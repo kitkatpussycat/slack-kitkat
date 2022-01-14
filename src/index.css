@@ -27,12 +27,9 @@ body {
     #fecde3,
     #ffd3e2
   ); */
-  background-size: 100% 100%;
+  /* background-size: 100% 100%;
   min-height: 100%;
   width: 100%;
-  /* overflow: hidden; */
-  /* color: rgb(39, 37, 37); */
-  /* color: rgb(32, 32, 44); */
   color: #023047;
   font-family: "Martel Sans", sans-serif;
   font-family: "Open Sans Condensed", sans-serif;
@@ -43,7 +40,19 @@ body {
       hsl(254.72, 79%, 74%) 0,
       transparent 59%
     ),
-    radial-gradient(at 82% 65%, hsl(285.45, 73%, 82%) 0, transparent 55%);
+    radial-gradient(at 82% 65%, hsl(285.45, 73%, 82%) 0, transparent 55%); */
+  background-image: url("https://images.unsplash.com/photo-1570284613060-766c33850e00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.entry-card {
+  backdrop-filter: blur(8px) saturate(197%);
+  -webkit-backdrop-filter: blur(8px) saturate(197%);
+  background-color: rgba(17, 25, 40, 0.13);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .text-sidebar {
@@ -60,6 +69,15 @@ body {
   background-color: rgba(189, 16, 224, 0.17);
   /* border-radius: 12px; */
   border: 1px solid rgba(209, 213, 219, 0.3);
+  /* background-image: url("https://wallpaperaccess.com/full/201325.png"); */
+}
+
+.sidebar-card {
+  backdrop-filter: blur(0px) saturate(172%);
+  -webkit-backdrop-filter: blur(0px) saturate(172%);
+  background-color: rgba(74, 144, 226, 0.25);
+  /* border-radius: 12px; */
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .card-f {
@@ -89,6 +107,64 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.sideModalBackGround {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1570284613060-766c33850e00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: radial-gradient(
+      at 47% 33%,
+      hsl(254.72, 79%, 74%) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 82% 65%, hsl(285.45, 73%, 82%) 0, transparent 55%); */
+}
+
+.bg-modal {
+  color: black;
+  background-image: url("https://images.unsplash.com/photo-1570284613060-766c33850e00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  color: white;
+  /* background-color: rgb(202, 128, 226);
+  background-size: cover;
+  background-image: radial-gradient(
+      at 47% 33%,
+      hsl(254.72, 79%, 74%) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 82% 65%, hsl(285.45, 73%, 82%) 0, transparent 55%); */
+}
+
+.text-bubble {
+  backdrop-filter: blur(2px) saturate(123%);
+  -webkit-backdrop-filter: blur(2px) saturate(123%);
+  background-color: rgba(74, 144, 226, 0.38);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  margin-top: 5px;
+  /* max-height: 100%;
+  width: 5px; */
+}
+
+.btn-go {
+  background-color: #046aac;
+  color: white;
+}
+
+.btn-medium {
+  background-color: #003160;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #11213b;
+  color: white;
 }
 
 /* width */
@@ -126,10 +202,10 @@ body {
 @layer components {
   .btn-red {
     /* @apply bg-gradient-to-r from-blue-400 to-purple-600  hover:bg-purple-500 text-white font-bold py-2 px-4 rounded mx-5; */
-    @apply bg-red-600 font-bold py-2 px-4 rounded mx-5;
+    @apply bg-red-600 font-bold py-2 px-4 rounded mx-1;
   }
 
   .btn-gradient {
-    @apply bg-gradient-to-r from-purple-500 to-fuchsia-500 font-bold py-2 px-4 rounded mx-5 text-white;
+    @apply bg-gradient-to-r from-purple-500 to-fuchsia-500 font-bold py-2 px-3 rounded mx-5 text-white;
   }
 }

@@ -13,7 +13,7 @@ function Dashboard() {
   // };
   return (
     <div className="h-screen">
-      <div className="grid grid-cols-12 gap-2 p-3">
+      <div className="grid grid-cols-12">
         <div className="hidden md:flex lg:flex md:col-span-3 lg:col-span-2">
           <Sidebar />
         </div>

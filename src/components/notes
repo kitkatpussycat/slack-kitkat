@@ -1,0 +1,17 @@
+login
+register
+slack-api
+auth
+Sidebar - addChannelModal
+Dashboard
+protected Routes
+body - addMemberModal
+BodyDirectMessage
+SidebarModal
+channelDetailsModal - nakaconnect sa Body...
+Sa BodyDirectMessage Pinalitan ko ng params.id lahat ng directUser.id para magkaroon ng effect yung ID pagnagpapalit ako ng URL
+
+
+
+
+installed, React router DOM, tailwind, dicebear, react markdown, react gfm, 

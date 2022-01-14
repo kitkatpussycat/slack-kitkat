@@ -196,7 +196,7 @@ export const getUserMessages = async (headers, id) => {
       }
     );
     data = res.data.data;
-    console.log(res);
+    console.log(res.data);
     console.log(data);
   } catch (error) {
     console.log(error.response.data.errors);

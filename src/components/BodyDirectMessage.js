@@ -6,6 +6,19 @@ import { getUserMessages } from "../api/slack-api";
 import { FiSend } from "react-icons/fi";
 import { BsMenuApp } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import SidebarModal from "./SidebarModal";
+import { FiRefreshCcw } from "react-icons/fi";
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/croodles";
+import Avatars from "../api/Avatars";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { useParams } from "react-router-dom";
+
+let svg = createAvatar(style, {
+  seed: "custom-seed",
+  // ... and other options
+});
 
 const BodyDirectMessage = () => {
   const { state } = useAuth();
@@ -16,12 +29,14 @@ const BodyDirectMessage = () => {
   const [directUser, setDirectUser] = useState({});
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [openSidebarModal, setOpenSidebarModal] = useState(false);
+  const params = useParams();
 
   ///////////////////////////////////////////////from stockoverflow..
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({});
   };
 
   useEffect(() => {
@@ -33,9 +48,16 @@ const BodyDirectMessage = () => {
       const users = await getUsers(state.headers);
       setListOfUsers(users);
     })();
-
     console.log(listOfUsers);
   }, []);
+
+  // const getFinalUser = async (lala, id) => {
+  //   let lalo = lala.find((lalo) => lala.id === parseInt(id));
+  //   console.log(lalo);
+  //   return lalo;
+  // };
+
+  // getFinalUser(listOfUsers, params.id);
 
   useEffect(() => {
     if (search === "") {
@@ -63,6 +85,7 @@ const BodyDirectMessage = () => {
     e.preventDefault();
     setSelectedUser("");
     // setSelectedUser(selectedUser.filter((t) => t !== s));
+    setMessages([]);
   };
 
   const handleSend = async (e) => {
@@ -71,7 +94,7 @@ const BodyDirectMessage = () => {
     if (selectedUser === "" && message === "") {
       alert("Please enter an email or message");
     } else {
-      await sendMessage(state.headers, directUser.id, "User", message);
+      await sendMessage(state.headers, params.id, "User", message);
       // setSelectedUser("");
       // setDirectUser("");
       setMessage("");
@@ -86,13 +109,14 @@ const BodyDirectMessage = () => {
 
   useEffect(() => {
     (async () => {
-      const msgs = await getUserMessages(state.headers, directUser.id);
+      const msgs = await getUserMessages(state.headers, params.id);
       console.log(msgs);
+      // console.log(msgs.length);
       setMessages(msgs);
-      // spanRef.current.scrollIntoView({ behavior: "smooth" });
     })();
-  }, [directUser.id]);
+  }, [params.id]);
   console.log(messages);
+  // console.log(messages.length);
   console.log(selectedUser);
 
   const getDate = (date) => {
@@ -101,16 +125,16 @@ const BodyDirectMessage = () => {
   };
 
   const handleReload = async (e) => {
-    const msgs = await getUserMessages(state.headers, directUser.id);
+    const msgs = await getUserMessages(state.headers, params.id);
     setMessages(msgs);
   };
 
   return (
-    <div className=" h-screen grid grid-rows-6 grid-flow-col lg:gap-2">
-      <div className="row-span-1 col-span-2 card flex justify-start lg:text-xl">
-        <div>
+    <div className=" h-screen grid grid-rows-6 grid-flow-col p-5">
+      <div className="row-span-1 col-span-2 card flex justify-start lg:text-xl rounded-t-xl">
+        <div className="w-full">
           <input
-            className="w-full text-black mx-2 my-2"
+            className="xs:w-1/2 lg:w-1/4 mx-2 my-2 bg-transparent border-2 border-slate-600 p-2"
             type="text"
             placeholder="search user"
             value={search}
@@ -120,7 +144,7 @@ const BodyDirectMessage = () => {
           {search === "" ? (
             <div></div>
           ) : (
-            <div className="mx-2 mb-5 card w-full h-1/2 overflow-y-auto overflow-x-hidden">
+            <div className="mx-2 mb-5 card xs:w-1/2 lg:w-1/4 h-1/2 overflow-y-auto overflow-x-hidden">
               <div>
                 {filteredUser.map((listOfUser) => (
                   <div
@@ -128,78 +152,121 @@ const BodyDirectMessage = () => {
                     key={listOfUser.id}
                     onClick={(e) => handleSelectedUser(e, listOfUser)}
                   >
-                    {listOfUser.uid}
+                    {" "}
+                    <Link to={`/dashboard/bodydirectmessage/${listOfUser.id}`}>
+                      {listOfUser.uid}
+                    </Link>
                   </div>
                 ))}
               </div>
             </div>
           )}
-          <div>
-            {/* to:{" "} */}
-            <span className="md:text-xl lg:text-xl font-bold mx-2">
-              {selectedUser}
-              {selectedUser === "" ? (
-                <div></div>
-              ) : (
-                <button
-                  className="btn-gradient text-sm py-0"
-                  onClick={(e) => {
-                    handleDeleteSelectedUser(e);
-                  }}
-                >
-                  delete
-                </button>
-              )}
-            </span>
-            <button className="lg:hidden">
-              <Link to={`/dashboard/sidebar`}>
-                <BsMenuApp />
-              </Link>
+          <div className="flex justify-between">
+            <div className="flex items-center">
+              {/* to:{" "} */}
+              <span className="md:text-xl lg:text-xl font-bold mx-2">
+                {selectedUser}
+                {selectedUser === "" ? (
+                  <div></div>
+                ) : (
+                  <button
+                    className="btn-red hover:bg-red-800 text-sm py-0 hover:px-4"
+                    onClick={(e) => {
+                      handleDeleteSelectedUser(e);
+                    }}
+                  >
+                    X
+                  </button>
+                )}
+              </span>
+            </div>
+            <button
+              className="md:hidden lg:hidden absolute right-5 top-5"
+              onClick={() => {
+                setOpenSidebarModal(true);
+              }}
+            >
+              <BsMenuApp />
             </button>
-            <button className="btn-gradient" onClick={handleReload}>
-              pindutin ako
-            </button>
+            {openSidebarModal && (
+              <SidebarModal openSidebarModal={setOpenSidebarModal} />
+            )}
+            <div>
+              <button onClick={handleReload} className="lg:text-5xl px-5">
+                <FiRefreshCcw />
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <div className="row-span-4 col-span-2 overflow-y-auto overflow-x-hidden card">
         {" "}
         {messages === undefined ? (
-          <span></span>
+          <div className="text-center font-bold"></div>
         ) : (
           messages.map(
             //kinopya ko lang
             (msg, index) => (
               <div
-                className={`mb-5 ${
-                  msg.sender.id === state.user.id ? "text-right" : "text-left"
+                className={`mb-5 flex w-full xs:text-xs md:text-lg ${
+                  msg.sender.id === state.user.id
+                    ? "justify-end"
+                    : "justify-start"
                 }`}
               >
-                <p className="text-xs py-0 mx-3">
-                  {getDate(msg.sender.created_at)}
-                </p>{" "}
-                <span className="card-g rounded-3xl py-1 px-5 mx-3 lg:text-xl">
-                  {msg.body}{" "}
-                </span>
+                <div
+                  className={`${
+                    msg.sender.id === state.user.id ? "text-right" : "text-left"
+                  }`}
+                >
+                  <p className="text-xs py-0 mx-3">{getDate(msg.created_at)}</p>{" "}
+                  <div
+                    className={`flex flex-row ${
+                      msg.sender.email === state.user.email
+                        ? "justify-end"
+                        : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`mx-1 flex items-end ${
+                        msg.sender.id === state.user.id ? "hidden" : "flex"
+                      }`}
+                    >
+                      <Avatars user={msg.sender.email} size={20} />
+                    </div>
+
+                    <div
+                      style={{ wordBreak: "break-word" }}
+                      className={`text-bubble text-justify py-1 px-5 w-fit flex ${
+                        msg.sender.id === state.user.id
+                          ? "items-end"
+                          : "items-start"
+                      }`}
+                    >
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {msg.body}
+                      </ReactMarkdown>
+                    </div>
+                    <div
+                      className={`mx-1 flex items-end ${
+                        msg.sender.id !== state.user.id ? "hidden" : "flex"
+                      }`}
+                    >
+                      <Avatars user={msg.sender.email} size={20} />
+                    </div>
+                  </div>
+                </div>
               </div>
             )
           )
         )}
         <div ref={messagesEndRef} />
       </div>
-      <div className="row-span-1 col-span-2 card flex flex-row">
-        <div className="w-full lg:w-full flex justify-center items-center">
+      <div className="row-span-1 col-span-2 card flex flex-row rounded-b-xl">
+        <div className="w-full lg:w-full flex justify-center items-center xs:p-5 lg:p-1">
           <textarea
-            className="w-11/12 lg:w-11/12 h-1/2 text-black mx-1"
+            className="w-11/12 h-3/4 lg:w-11/12 lg:h-1/2 text-white mx-1 resize-none p-2 rounded-lg bg-transparent border-2 border-white"
             placeholder={`Message  ${selectedUser}`}
-            // ${
-            //   selectedUser === "" ? (
-            //     <span>lala</span>
-            //   ) : (
-            //     <span>{selectedUser}</span>
-            //   )
-            // }
-            // `}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}

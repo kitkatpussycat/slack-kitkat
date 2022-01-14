@@ -32,6 +32,10 @@ function App() {
             }
           >
             <Route path="body/:id" element={<Body />} />
+            <Route
+              path="bodydirectmessage/:id"
+              element={<BodyDirectMessage />}
+            />
             <Route path="bodydirectmessage" element={<BodyDirectMessage />} />
             <Route path="sidebar" element={<Sidebar />}></Route>
           </Route>

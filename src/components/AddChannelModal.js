@@ -24,23 +24,31 @@ const AddChannelModal = ({ closeChannelModal }) => {
 
   return ReactDOM.createPortal(
     <div className="modalBackGround">
-      <div className="bg-gradient px-20 py-5 w-1/4 h-1/4 flex flex-col items-center gap-5">
+      <div className="bg-modal px-20 py-5 xs:w-fit xs:h-fit flex flex-col items-center gap-5">
         <div className="title">
           <h1 className="text-center font-bold">Add New Channel</h1>
         </div>
-        <input
-          className="text-black"
-          type="text"
-          value={channelName}
-          onChange={(e) => setChannelName(e.target.value)}
-        />
-        <p>{channelName}</p>
+        <div className="w-full bg-red-700">
+          <input
+            className="text-black w-full"
+            type="text"
+            value={channelName}
+            onChange={(e) => setChannelName(e.target.value)}
+          />
+          {/* <p>{channelName}</p> */}
+        </div>
 
         <div className="footer flex justify-around w-3/4">
-          <button className="card p-3" onClick={() => closeChannelModal(false)}>
+          <button
+            className="card p-3 hover:bg-blue-900 transition-all"
+            onClick={() => closeChannelModal(false)}
+          >
             Cancel
           </button>
-          <button className="card p-3" onClick={handleCreateChannel}>
+          <button
+            className="card p-3 hover:bg-blue-900 transition-all"
+            onClick={handleCreateChannel}
+          >
             Continue
           </button>
         </div>
