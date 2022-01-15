@@ -16,6 +16,8 @@ import * as style from "@dicebear/croodles";
 import Avatars from "../api/Avatars";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import useSWR from "swr";
+import { fetcher } from "../api/slack-api";
 
 let svg = createAvatar(style, {
   seed: "custom-seed",
@@ -66,13 +68,34 @@ const Body = () => {
   }, [params.id]);
 
   useEffect(() => {
-    (async () => {
-      const msgs = await getChannelMessages(state.headers, params.id);
-      // console.log(msgs);
-      setMessages(msgs);
-      // spanRef.current.scrollIntoView({ behavior: "smooth" });
-    })();
+    const interval = setInterval(() => {
+      (async () => {
+        const msgs = await getChannelMessages(state.headers, params.id);
+        setMessages(msgs);
+      })();
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [params.id]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const msgs = await getChannelMessages(state.headers, params.id);
+  //     // console.log(msgs);
+  //     setMessages(msgs);
+  //     // spanRef.current.scrollIntoView({ behavior: "smooth" });
+  //   })();
+  // }, [params.id]);
+
+  // const API_URL = "https://slackapi.avionschool.com/api/v1";
+
+  // const { data, error } = useSWR(
+  //   [
+  //     `${API_URL}/messages?receiver_id=${params.id}&receiver_class=Channel`,
+  //     state.headers,
+  //   ],
+  //   fetcher
+  // );
 
   const handleSend = async (e) => {
     //kinopya ko lang

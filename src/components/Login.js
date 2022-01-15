@@ -78,6 +78,10 @@ function Login() {
                 Sign up Now!
               </Link>
             </div>
+            <div className="absolute bottom-0 w-full text-center hover:bg-blue-900 font-semibold">
+              {/* {error.length > 0 ? alert({ error }) : alert({ flash })} */}
+              {error.length ? error.map((err) => <p>{err}</p>) : null}
+            </div>
           </div>
         </div>
       </div>

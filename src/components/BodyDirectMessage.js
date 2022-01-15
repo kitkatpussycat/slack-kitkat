@@ -120,16 +120,32 @@ const BodyDirectMessage = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      const msgs = await getUserMessages(state.headers, params.id);
-      console.log(msgs);
-      // console.log(msgs.length);
-      setMessages(msgs);
-    })();
+    const interval = setInterval(() => {
+      (async () => {
+        const msgs = await getUserMessages(state.headers, params.id);
+        console.log(msgs);
+        // console.log(msgs.length);
+        setMessages(msgs);
+      })();
+    }, 1000);
+    console.log(messages);
+    // console.log(messages.length);
+    console.log(selectedUser);
+
+    return () => clearInterval(interval);
   }, [params.id]);
-  console.log(messages);
-  // console.log(messages.length);
-  console.log(selectedUser);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const msgs = await getUserMessages(state.headers, params.id);
+  //     console.log(msgs);
+  //     // console.log(msgs.length);
+  //     setMessages(msgs);
+  //   })();
+  // }, [params.id]);
+  // console.log(messages);
+  // // console.log(messages.length);
+  // console.log(selectedUser);
 
   const getDate = (date) => {
     let r = new Date(date);

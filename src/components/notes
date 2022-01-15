@@ -11,6 +11,8 @@ SidebarModal
 channelDetailsModal - nakaconnect sa Body...
 Sa BodyDirectMessage Pinalitan ko ng params.id lahat ng directUser.id para magkaroon ng effect yung ID pagnagpapalit ako ng URL
 
+dinagdag yung set interval para automatic na na nakakasend at receive ng message
+
 
 
 

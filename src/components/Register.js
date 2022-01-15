@@ -17,6 +17,8 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError([]);
+    setFlash("");
     const [response, errors] = await register(
       registerAccount.email,
       registerAccount.password,
@@ -92,6 +94,7 @@ function Register() {
               </button>
             </div>
             <div className="absolute bottom-0 w-full text-center hover:bg-blue-900 font-semibold">
+              {/* {error.length > 0 ? alert({ error }) : alert({ flash })} */}
               {error.length ? error.map((err) => <p>{err}</p>) : null}
               {flash && <p>{flash}</p>}
               <span>Back to </span>

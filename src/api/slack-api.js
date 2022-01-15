@@ -34,7 +34,8 @@ export const login = async (email, password) => {
     headers["expiry"] = response.headers["expiry"];
     headers["uid"] = response.headers["uid"];
   } catch (error) {
-    errors = error.response.data.errors.full_messages;
+    errors = error.response.data.errors;
+    // errors = error.response.data.errors.full_messages;
     console.log(errors);
   }
 
@@ -203,3 +204,15 @@ export const getUserMessages = async (headers, id) => {
   }
   return data;
 };
+
+export const fetcher = (url, headers) =>
+  axios
+    .get(url, {
+      headers: {
+        ...headers,
+      },
+    })
+    .then((res) => {
+      console.log(res.data.data);
+      return res.data.data;
+    });
