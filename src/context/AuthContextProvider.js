@@ -30,6 +30,7 @@ function AuthContextProvider(props) {
   useEffect(() => {
     localStorage.setItem("auth", JSON.stringify(state));
   }, [state]);
+
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
       {props.children}

@@ -42,7 +42,7 @@ const BodyDirectMessage = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-  /////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     (async () => {
       const users = await getUsers(state.headers);
@@ -84,7 +84,6 @@ const BodyDirectMessage = () => {
   const handleDeleteSelectedUser = (e, s) => {
     e.preventDefault();
     setSelectedUser("");
-    // setSelectedUser(selectedUser.filter((t) => t !== s));
     setMessages([]);
   };
 
@@ -101,9 +100,22 @@ const BodyDirectMessage = () => {
     }
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key == "Enter") {
+  // const handleKeyPress = (event) => {
+  //   if (event.key == "Enter") {
+  //     handleSend();
+  //   }
+  // };
+
+  const handleKeyUp = (e) => {
+    if (e.which === 13 && !e.shiftKey) {
+      e.preventDefault();
       handleSend();
+    }
+    if (
+      (e.code === "Enter" || (e.location === 3 && e.key === "Enter")) &&
+      e.shiftKey
+    ) {
+      setMessage(message + "\n");
     }
   };
 
@@ -208,7 +220,7 @@ const BodyDirectMessage = () => {
             //kinopya ko lang
             (msg, index) => (
               <div
-                className={`mb-5 flex w-full xs:text-xs md:text-lg ${
+                className={`mb-5 w-full xs:text-xs md:text-lg ${
                   msg.sender.id === state.user.id
                     ? "justify-end"
                     : "justify-start"
@@ -237,7 +249,7 @@ const BodyDirectMessage = () => {
 
                     <div
                       style={{ wordBreak: "break-word" }}
-                      className={`text-bubble text-justify py-1 px-5 w-fit flex ${
+                      className={`text-bubble text-justify py-1 px-5 w-fit inline-block ${
                         msg.sender.id === state.user.id
                           ? "items-end"
                           : "items-start"
@@ -269,7 +281,7 @@ const BodyDirectMessage = () => {
             placeholder={`Message  ${selectedUser}`}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyUp={(e) => handleKeyUp(e)}
           ></textarea>{" "}
           <button
             className=" px-0 py-0 text-xs mx-1 text-white lg:font-bold lg:text-3xl"

@@ -23,14 +23,14 @@ let svg = createAvatar(style, {
 });
 
 const Body = () => {
-  ////////////////////////////////////////////////////////kinopya ko
+  //////////////////////////////////////////////////////////////////////////////kinopya ko
   const params = useParams();
   const { state } = useAuth();
   const [channelData, setChannelData] = useState({});
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-  /////////////////////////////////////////////////mine
+  /////////////////////////////////////////////////
   const [openAddMemberModal, setOpenAddMemberModal] = useState(false);
   const [openSidebarModal, setOpenSidebarModal] = useState(false);
   const [openChannelDetailsModal, setOpenChannelDetailsModal] = useState(false);
@@ -50,7 +50,7 @@ const Body = () => {
     scrollToBottom();
   }, [messages]);
 
-  ////////////////////////////////////////////////////////kinopya ko
+  ////////////////////////////////////////////////////////////////////////////kinopya ko
   useEffect(() => {
     (async () => {
       const data = await getChannelDetail(state.headers, params.id);
@@ -88,9 +88,22 @@ const Body = () => {
     }
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key == "Enter") {
+  // const handleKeyPress = (event) => {
+  //   if (event.key == "Enter") {
+  //     handleSend();
+  //   }
+  // };
+
+  const handleKeyUp = (e) => {
+    if (e.which === 13 && !e.shiftKey) {
+      e.preventDefault();
       handleSend();
+    }
+    if (
+      (e.code === "Enter" || (e.location === 3 && e.key === "Enter")) &&
+      e.shiftKey
+    ) {
+      setMessage(message + "\n");
     }
   };
 
@@ -241,7 +254,7 @@ const Body = () => {
 
                     <div
                       style={{ wordBreak: "break-word" }}
-                      className={`text-bubble text-justify py-1 px-5 w-fit flex ${
+                      className={`text-bubble text-justify py-1 px-5 w-fit inline-block ${
                         msg.sender.id === state.user.id
                           ? "items-end"
                           : "items-start"
@@ -273,7 +286,7 @@ const Body = () => {
             placeholder={`Message ${channelData.name}`}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyPress={(e) => handleKeyUp(e)}
           ></textarea>{" "}
           <button
             className=" px-0 py-0 text-xs mx-1 text-white lg:font-bold lg:text-3xl hover:bg-blue-900 transition-all"

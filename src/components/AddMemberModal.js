@@ -36,7 +36,7 @@ const AddMemberModal = ({ closeAddMemberModal, channelId }) => {
     e.preventDefault();
     setSelectedUsers({ selectedUser });
     console.log(selectedUsers);
-    console.log(selectedUsers.selectedUser.uid);
+    console.log(selectedUsers.uid);
     console.log("nagana ba ito?");
   };
 
@@ -52,7 +52,7 @@ const AddMemberModal = ({ closeAddMemberModal, channelId }) => {
       const status = await addMemberChannel(
         state.headers,
         channelId,
-        selectedUsers.id
+        selectedUsers.selectedUser.id
       );
       if (status === 200) {
         alert(`Added ${selectedUsers.selectedUser.uid}!`);

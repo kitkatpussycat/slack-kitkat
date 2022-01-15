@@ -11,7 +11,6 @@ const Sidebar = () => {
   const { state } = useAuth();
   const [channels, setChannels] = useState([]);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
-
   const [openSendMessageModal, setOpenSendMessageModal] = useState(false);
 
   useEffect(() => {
@@ -54,19 +53,24 @@ const Sidebar = () => {
               <AddChannelModal closeChannelModal={setOpenAddChannelModal} />
             )}
           </div>
+
           <div className="card rounded-lg w-5/6 overflow-y-auto overflow-x-hidden h-1/2 p-2 flex flex-col items-center">
-            {channels.map((channel) => (
-              <div className="w-full">
-                <div
-                  className="hover:bg-blue-900 transition-all"
-                  key={channel.id}
-                >
-                  <Link to={`/dashboard/body/${channel.id}`}>
-                    {channel.name}
-                  </Link>
+            {channels === undefined ? (
+              <div className="text-center font-bold"></div>
+            ) : (
+              channels.map((channel) => (
+                <div className="w-full">
+                  <div
+                    className="hover:bg-blue-900 transition-all"
+                    key={channel.id}
+                  >
+                    <Link to={`/dashboard/body/${channel.id}`}>
+                      {channel.name}
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
 
           <div className="w-full flex flex-col items-center">
