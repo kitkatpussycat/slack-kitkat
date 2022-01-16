@@ -42,15 +42,15 @@ const Body = () => {
   const [listOfUsers, setListOfUsers] = useState([]);
 
   /////////////////////////////////////////////////galing sa stock overflow... copy paste lang using useRef
-  const messagesEndRef = useRef(null);
+  // const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({});
-  };
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({});
+  // };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
 
   ////////////////////////////////////////////////////////////////////////////kinopya ko
   useEffect(() => {
@@ -67,17 +67,17 @@ const Body = () => {
     })();
   }, [params.id]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      (async () => {
-        const msgs = await getChannelMessages(state.headers, params.id);
-        setMessages(msgs);
-      })();
-    }, 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     (async () => {
+  //       const msgs = await getChannelMessages(state.headers, params.id);
+  //       setMessages(msgs);
+  //     })();
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [params.id]);
-
+  //   return () => clearInterval(interval);
+  // }, [params.id]);
+  ///////////////////////////////////////////////////////////////////////////////////////////////////OR
   // useEffect(() => {
   //   (async () => {
   //     const msgs = await getChannelMessages(state.headers, params.id);
@@ -86,16 +86,31 @@ const Body = () => {
   //     // spanRef.current.scrollIntoView({ behavior: "smooth" });
   //   })();
   // }, [params.id]);
+  /////////////////////////////////////////////////////////////////////////////////////////////////////OR
+  const API_URL = "https://slackapi.avionschool.com/api/v1";
 
-  // const API_URL = "https://slackapi.avionschool.com/api/v1";
+  const { data: msgs, error } = useSWR(
+    [
+      `${API_URL}/messages?receiver_id=${params.id}&receiver_class=Channel`,
+      state.headers,
+    ],
+    fetcher,
+    { refreshInterval: 1000 }
+  );
+  console.log(msgs);
+  // console.log(messages);
 
-  // const { data, error } = useSWR(
-  //   [
-  //     `${API_URL}/messages?receiver_id=${params.id}&receiver_class=Channel`,
-  //     state.headers,
-  //   ],
-  //   fetcher
-  // );
+  ///////////////////////////////////////////////////////////////////////////////tapos dito dapat ilagay to..:
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({});
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [msgs]);
 
   const handleSend = async (e) => {
     //kinopya ko lang
@@ -134,6 +149,7 @@ const Body = () => {
     const msgs = await getChannelMessages(state.headers, params.id);
     // console.log(msgs);
     setMessages(msgs);
+    console.log(messages);
   };
 
   const getDate = (date) => {
@@ -141,7 +157,7 @@ const Body = () => {
     return <span>{r.toDateString()}</span>;
   };
   console.log([messages]);
-  ///////////////////////////////////////////////////////////////////testing
+  ////////////////////////////////////////////////////////////////////////////////////////////////testing
 
   useEffect(() => {
     (async () => {
@@ -165,7 +181,7 @@ const Body = () => {
     }
     return arr;
   };
-
+  /////////////////////////////////////////////////////////////////////////////////pwede rin:
   // const allUsers = () => {
   //   let arr = [];
   //   for (let i = 0; i < channelMember.length; i++) {
@@ -236,10 +252,10 @@ const Body = () => {
       </div>
       <div className="row-span-4 col-span-2 overflow-y-auto overflow-x-hidden card">
         {" "}
-        {messages === undefined ? (
+        {msgs === undefined ? (
           <div></div>
         ) : (
-          messages.map(
+          msgs.map(
             //kinopya ko lang
             (msg, index) => (
               <div

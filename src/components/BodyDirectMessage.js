@@ -14,6 +14,8 @@ import Avatars from "../api/Avatars";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useParams } from "react-router-dom";
+import useSWR from "swr";
+import { fetcher } from "../api/slack-api";
 
 let svg = createAvatar(style, {
   seed: "custom-seed",
@@ -32,16 +34,16 @@ const BodyDirectMessage = () => {
   const [openSidebarModal, setOpenSidebarModal] = useState(false);
   const params = useParams();
 
-  ///////////////////////////////////////////////from stockoverflow..
-  const messagesEndRef = useRef(null);
+  ///////////////////////////////////////////////from stockoverflow.. nilipat ko sa baba ng useSWR
+  // const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({});
-  };
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({});
+  // };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
   ///////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     (async () => {
@@ -119,22 +121,22 @@ const BodyDirectMessage = () => {
     }
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      (async () => {
-        const msgs = await getUserMessages(state.headers, params.id);
-        console.log(msgs);
-        // console.log(msgs.length);
-        setMessages(msgs);
-      })();
-    }, 1000);
-    console.log(messages);
-    // console.log(messages.length);
-    console.log(selectedUser);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     (async () => {
+  //       const msgs = await getUserMessages(state.headers, params.id);
+  //       console.log(msgs);
+  //       // console.log(msgs.length);
+  //       setMessages(msgs);
+  //     })();
+  //   }, 1000);
+  //   console.log(messages);
+  //   // console.log(messages.length);
+  //   console.log(selectedUser);
 
-    return () => clearInterval(interval);
-  }, [params.id]);
-
+  //   return () => clearInterval(interval);
+  // }, [params.id]);
+  //////////////////////////////////////////////////////////////////////////////////////OR
   // useEffect(() => {
   //   (async () => {
   //     const msgs = await getUserMessages(state.headers, params.id);
@@ -147,6 +149,31 @@ const BodyDirectMessage = () => {
   // // console.log(messages.length);
   // console.log(selectedUser);
 
+  const API_URL = "https://slackapi.avionschool.com/api/v1";
+
+  const { data: msgs, error } = useSWR(
+    [
+      `${API_URL}/messages?receiver_id=${params.id}&receiver_class=User`,
+      state.headers,
+    ],
+    fetcher,
+    { refreshInterval: 1000 }
+  );
+  console.log(msgs);
+  // console.log(messages);
+
+  ///////////////////////////////////////////////////////////////////////////////tapos dito dapat ilagay to..:
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({});
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [msgs]);
+  //////////////////////////////////////////////////////////////////////////////////////////
   const getDate = (date) => {
     let r = new Date(date);
     return <span>{r.toDateString()}</span>;
@@ -229,10 +256,10 @@ const BodyDirectMessage = () => {
       </div>
       <div className="row-span-4 col-span-2 overflow-y-auto overflow-x-hidden card">
         {" "}
-        {messages === undefined ? (
+        {msgs === undefined ? (
           <div className="text-center font-bold"></div>
         ) : (
-          messages.map(
+          msgs.map(
             //kinopya ko lang
             (msg, index) => (
               <div
